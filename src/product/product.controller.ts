@@ -1,7 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 import { UtilityService } from '../shared/utility/utility.service';
 import { GlobalHelperService } from 'src/shared/global-helper/global-helper.service';
-@Controller('product')
+
+//การทำ VersioningType แบบ URIโดยการเพิ่ม version ใน path ของ controller
+//http://localhost:3000/v1/product/
+@Controller({
+  path: 'product',
+  version: '1',
+})
 export class ProductController {
   constructor(
     private readonly utilityService: UtilityService,
