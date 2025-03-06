@@ -5,6 +5,6 @@ import { th } from 'date-fns/locale';
 @Injectable()
 export class GlobalHelperService {
   getServerThaiDate(): string {
-    return format(new Date(), 'dd MMMM yyyy H:m:s', { locale: th });
+    return format(new Date(), 'dd MMMM yyyy HH:mm:ss', { locale: th });
   }
 }
