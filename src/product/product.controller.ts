@@ -1,9 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Version } from '@nestjs/common';
 import { UtilityService } from '../shared/utility/utility.service';
 import { GlobalHelperService } from 'src/shared/global-helper/global-helper.service';
 
 //การทำ VersioningType แบบ URIโดยการเพิ่ม version ใน path ของ controller
-//http://localhost:3000/v1/product/
+//http://localhost:3000/api/v1/product/
 @Controller({
   path: 'product',
   version: '1',
@@ -14,7 +14,7 @@ export class ProductController {
     private readonly globalHelperService: GlobalHelperService,
   ) {}
 
-  @Get('/') //http://localhost:3000/product
+  @Get('/') //http://localhost:3000/api/v1/product
   getProducts(): any[] {
     return [
       {
@@ -30,12 +30,12 @@ export class ProductController {
     ];
   }
 
-  @Get('/date') //http://localhost:3000/product/date
+  @Get('/date') //http://localhost:3000/api/v1/product/date
   getDate(): string {
     return this.utilityService.getServerDate();
   }
 
-  @Get('/thaidate') //http://localhost:3000/product/thaidate
+  @Get('/thaidate') //http://localhost:3000/api/v1/product/thaidate
   getThaiDate(): string {
     return this.globalHelperService.getServerThaiDate();
   }
