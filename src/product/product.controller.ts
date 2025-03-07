@@ -41,7 +41,7 @@ export class ProductController {
   // }
 
   @Version('2')
-  @Get('/thaidate') //http://localhost:3000/api/v/product/thaidate
+  @Get('/thaidate') //http://localhost:3000/api/v2/product/thaidate
   getThaiDate2(): string {
     return this.globalHelperService.getServerThaiDate();
   }
