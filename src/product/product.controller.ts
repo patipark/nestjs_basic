@@ -35,8 +35,14 @@ export class ProductController {
     return this.utilityService.getServerDate();
   }
 
-  @Get('/thaidate') //http://localhost:3000/api/v1/product/thaidate
-  getThaiDate(): string {
+  // @Get('/thaidate') //http://localhost:3000/api/v1/product/thaidate
+  // getThaiDate(): string {
+  //   return this.globalHelperService.getServerThaiDate();
+  // }
+
+  @Version('2')
+  @Get('/thaidate') //http://localhost:3000/api/v/product/thaidate
+  getThaiDate2(): string {
     return this.globalHelperService.getServerThaiDate();
   }
 }
