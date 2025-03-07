@@ -1,4 +1,11 @@
-import { Controller, Get, Version } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Version,
+} from '@nestjs/common';
 import { UtilityService } from '../shared/utility/utility.service';
 import { GlobalHelperService } from 'src/shared/global-helper/global-helper.service';
 
@@ -31,8 +38,12 @@ export class ProductController {
   }
 
   @Get('/date') //http://localhost:3000/api/v1/product/date
-  getDate(): string {
-    return this.utilityService.getServerDate();
+  getDate(): any {
+    // throw new HttpException('ทดสอบโยน Error', HttpStatus.BAD_REQUEST);
+    // throw new BadRequestException('ทดสอบโยน Error');
+    return {
+      server_date: this.utilityService.getServerDate(),
+    };
   }
 
   // @Get('/thaidate') //http://localhost:3000/api/v1/product/thaidate
@@ -40,9 +51,11 @@ export class ProductController {
   //   return this.globalHelperService.getServerThaiDate();
   // }
 
-  @Version('2')
-  @Get('/thaidate') //http://localhost:3000/api/v2/product/thaidate
-  getThaiDate2(): string {
-    return this.globalHelperService.getServerThaiDate();
+  @Version('2') //http://localhost:3000/api/v2/product/thaidate
+  @Get('/thaidate')
+  getThaiDate2(): any {
+    return {
+      server_thai_date: this.globalHelperService.getServerThaiDate(),
+    };
   }
 }
