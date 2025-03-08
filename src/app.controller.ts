@@ -5,7 +5,15 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get('/')
+  getHome() {
+    return {
+      message: 'Welcome to my NestJS API',
+      version: process.env.API_VERSION ?? '1.0.0',
+    };
+  }
+
+  @Get('/hello')
   getHello(): string {
     return this.appService.getHello();
   }
