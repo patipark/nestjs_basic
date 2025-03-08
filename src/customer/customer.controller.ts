@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ValidationPipe,
+  UsePipes,
+} from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -11,11 +21,12 @@ export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
   @Post() //http://localhost:3000/api/v1/customer
+  @UsePipes(new ValidationPipe({ transform: true })) //https://docs.nestjs.com/techniques/validation#transform-payload-objects
   create(@Body() createCustomerDto: CreateCustomerDto) {
     return this.customerService.create(createCustomerDto);
   }
 
-  @Get()  //http://localhost:3000/api/v1/customer
+  @Get() //http://localhost:3000/api/v1/customer
   findAll() {
     return this.customerService.findAll();
   }
@@ -26,6 +37,7 @@ export class CustomerController {
   }
 
   @Patch(':id') //http://localhost:3000/api/v1/customer/1
+  @UsePipes(new ValidationPipe({ transform: true }))
   update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
     return this.customerService.update(+id, updateCustomerDto);
   }
