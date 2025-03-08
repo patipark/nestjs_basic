@@ -8,6 +8,7 @@ import { CustomerModule } from './customer/customer.module';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Dialect } from 'sequelize';
+import { Customer } from './customer/entities/customer.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -20,6 +21,7 @@ import { Dialect } from 'sequelize';
       database: process.env.DB_NAME,
       autoLoadModels: true,
       synchronize: true,
+      models: [Customer],
     }),
     ProductModule,
     UtilityModule,
