@@ -7,11 +7,12 @@ import { GlobalHelperModule } from './shared/global-helper/global-helper.module'
 import { CustomerModule } from './customer/customer.module';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Dialect } from 'sequelize';
 @Module({
   imports: [
     ConfigModule.forRoot(),
     SequelizeModule.forRoot({
-      dialect: 'mariadb', // 'mysql',
+      dialect: process.env.DB_DIALECT as Dialect,
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT ?? '3306'),
       username: process.env.DB_USER,
