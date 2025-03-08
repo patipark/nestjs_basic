@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { VersioningType } from '@nestjs/common/enums';
+import { HttpStatus, VersioningType } from '@nestjs/common/enums';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
@@ -18,7 +18,11 @@ async function bootstrap() {
     type: VersioningType.URI,
   });
   // enable auto validation
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY, // 422= Unprocessable Entity ,default 400
+    }),
+  );
   // listen port
   await app.listen(process.env.PORT ?? 3000);
 }
