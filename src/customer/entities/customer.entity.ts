@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize';
-import { Column, Model, Table } from 'sequelize-typescript';
+// import { DataTypes } from 'sequelize';
+import { DataType, Column, Model, Table } from 'sequelize-typescript';
 
 @Table({
   tableName: 'customers',
@@ -14,7 +14,7 @@ export class Customer extends Model {
   //   id: number;
 
   @Column({
-    type: DataTypes.STRING(200),
+    type: DataType.STRING(200),
     allowNull: false,
   })
   name: string;
