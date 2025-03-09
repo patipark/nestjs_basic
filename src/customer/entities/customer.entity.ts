@@ -25,6 +25,8 @@ export class Customer extends Model {
   @Column
   email: string;
 
-  @Column
+  @Column({
+    defaultValue: true,
+  })
   isActive: boolean;
 }
