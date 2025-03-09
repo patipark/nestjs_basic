@@ -17,8 +17,9 @@ export class CustomerService {
     return 'This action adds a new customer';
   }
 
-  findAll() {
-    return `This action returns all customer`;
+  async findAll() {
+    // return `This action returns all customer`;
+    return await this.customerModel.findAll();
   }
 
   findOne(id: number) {
