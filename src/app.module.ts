@@ -24,6 +24,11 @@ import { Customer } from './customer/entities/customer.entity';
       database: process.env.DB_NAME,
       autoLoadModels: true,
       synchronize: true,
+      // sync: {},// สร้างเฉพาะ table ที่ไม่มีเท่านั้น
+      // sysc : { force: true }, // ลบ table ทิ้งแล้วสร้างใหม่
+      sync: {
+        alter: true, // แก้ไข column ที่มีอยู่แล้ว ไม่ลบ table ทิ้ง
+      },
       models: [Customer],
     }),
     ProductModule,
