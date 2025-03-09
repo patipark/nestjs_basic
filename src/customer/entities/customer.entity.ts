@@ -1,3 +1,4 @@
+import { DataTypes } from 'sequelize';
 import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table({
@@ -12,7 +13,10 @@ export class Customer extends Model {
   //   })
   //   id: number;
 
-  @Column
+  @Column({
+    type: DataTypes.STRING(200),
+    allowNull: false,
+  })
   name: string;
 
   @Column
