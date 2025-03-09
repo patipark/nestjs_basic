@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // import { DataTypes } from 'sequelize';
 import { DataType, Column, Model, Table } from 'sequelize-typescript';
 
@@ -14,7 +17,7 @@ export class Customer extends Model {
   //   id: number;
 
   @Column({
-    type: DataType.STRING(200),
+    type: DataType.STRING(400),
     allowNull: false,
   })
   name: string;
