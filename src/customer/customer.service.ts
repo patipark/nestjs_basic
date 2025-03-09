@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { InjectModel } from '@nestjs/sequelize';
@@ -13,8 +13,11 @@ export class CustomerService {
     private readonly customerModel: typeof Customer,
   ) {}
 
-  create(createCustomerDto: CreateCustomerDto) {
-    return 'This action adds a new customer';
+  async create(createCustomerDto: CreateCustomerDto) {
+    // return 'This action adds a new customer';
+    return await this.customerModel.create(
+      createCustomerDto as Partial<Customer>,
+    );
   }
 
   async findAll() {
@@ -22,15 +25,28 @@ export class CustomerService {
     return await this.customerModel.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  async findOne(id: number) {
+    // return `This action returns a #${id} customer`;
+    const customer = await this.customerModel.findByPk(id);
+    if (!customer) {
+      throw new NotFoundException(); // 404
+    }
+    return customer;
   }
 
-  update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
+  async update(id: number, updateCustomerDto: UpdateCustomerDto) {
+    // return `This action updates a #${id} customer`;
+    const [affectedCount] = await this.customerModel.update(updateCustomerDto, {
+      where: { id: id },
+    });
+    return affectedCount;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  async remove(id: number) {
+    // return `This action removes a #${id} customer`;
+    const numberOfDestroyRow = await this.customerModel.destroy({
+      where: { id: id },
+    });
+    return numberOfDestroyRow;
   }
 }
