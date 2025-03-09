@@ -29,6 +29,11 @@ import { Customer } from './customer/entities/customer.entity';
       sync: {
         alter: true, // แก้ไข column ที่มีอยู่แล้ว ไม่ลบ table ทิ้ง
       },
+      pool: {
+        max: 10, // จำนวน connection สูงสุดใน pool
+        min: 0, // จำนวน connection ขั้นต่ำใน pool
+        idle: 30000, // ปล่อย connection ถ้าไม่ได้ใช้งานเกิน 30 วินาที
+      },
       models: [Customer],
     }),
     ProductModule,
