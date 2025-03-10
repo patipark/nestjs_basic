@@ -22,7 +22,7 @@ export class CustomerService {
   async findAll() {
     // return `This action returns all customer`;
     return await this.customerModel.findAll({
-      include: [Category], 
+      include: [Category],
     });
   }
 
