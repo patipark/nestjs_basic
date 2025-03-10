@@ -24,11 +24,7 @@ export class CustomerService {
 
   async findOne(id: number) {
     // return `This action returns a #${id} customer`;
-    const customer = await this.customerModel.findByPk(id);
-    if (!customer) {
-      throw new NotFoundException(); // 404
-    }
-    return customer;
+    return await this.customerModel.findByPk(id);
   }
 
   async update(id: number, updateCustomerDto: UpdateCustomerDto) {

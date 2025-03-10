@@ -8,6 +8,8 @@ import {
   Delete,
   ValidationPipe,
   UsePipes,
+  NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
@@ -22,8 +24,13 @@ export class CustomerController {
 
   @Post() //http://localhost:3000/api/v1/customer
   @UsePipes(new ValidationPipe({ transform: true })) //https://docs.nestjs.com/techniques/validation#transform-payload-objects
-  create(@Body() createCustomerDto: CreateCustomerDto) {
-    return this.customerService.create(createCustomerDto);
+  async create(@Body() createCustomerDto: CreateCustomerDto) {
+    // return this.customerService.create(createCustomerDto);
+    const customer = await this.customerService.create(createCustomerDto);
+    return {
+      message: 'เพิ่มข้อมูลสำเร็จ',
+      data: customer,
+    };
   }
 
   @Get() //http://localhost:3000/api/v1/customer
@@ -32,18 +39,30 @@ export class CustomerController {
   }
 
   @Get(':id') //http://localhost:3000/api/v1/customer/1
-  findOne(@Param('id') id: string) {
-    return this.customerService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const customer = await this.customerService.findOne(+id);
+    if (!customer) {
+      throw new NotFoundException(); // 404
+    }
+    return customer;
   }
 
   @Patch(':id') //http://localhost:3000/api/v1/customer/1
   @UsePipes(new ValidationPipe({ transform: true }))
-  update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
-    return this.customerService.update(+id, updateCustomerDto);
+  async update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
+    const affectedCount = await this.customerService.update(+id, updateCustomerDto);
+    if (affectedCount === 0) {
+      throw new BadRequestException(`แก้ไขข้อมูลไม่สำเร็จ`); // 400
+    }
+    return { message: 'แก้ไขข้อมูลสำเร็จ' };
   }
 
   @Delete(':id') //http://localhost:3000/api/v1/customer/1
-  remove(@Param('id') id: string) {
-    return this.customerService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const numberOfDestroyRow = await this.customerService.remove(+id);
+    if (numberOfDestroyRow === 0) {
+      throw new NotFoundException('ไม่พบข้อมูลที่ต้องการลบ'); // 404
+    }
+    return { message: 'ลบข้อมูลสำเร็จ' };
   }
 }
