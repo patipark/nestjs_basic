@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Dialect } from 'sequelize';
 import { Customer } from './customer/entities/customer.entity';
+import { CategoryModule } from './category/category.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -37,6 +38,7 @@ import { Customer } from './customer/entities/customer.entity';
     UtilityModule,
     GlobalHelperModule,
     CustomerModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
