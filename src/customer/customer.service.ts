@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -15,9 +14,7 @@ export class CustomerService {
 
   async create(createCustomerDto: CreateCustomerDto) {
     // return 'This action adds a new customer';
-    return await this.customerModel.create(
-      createCustomerDto as Partial<Customer>,
-    );
+    return await this.customerModel.create(createCustomerDto as Partial<Customer>);
   }
 
   async findAll() {
