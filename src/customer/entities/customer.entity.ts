@@ -1,6 +1,7 @@
 // import { DataTypes } from 'sequelize';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { DataType, Column, Model, Table, Is } from 'sequelize-typescript';
+import { DataType, Column, Model, Table, Is, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import { Category } from 'src/category/entities/category.entity';
 
 @Table({
   tableName: 'customers',
@@ -25,6 +26,7 @@ export class Customer extends Model {
   @IsEmail()
   email: string;
 
+  @ForeignKey(() => Category)
   @Column({
     field: 'category_id',
   })
@@ -34,4 +36,7 @@ export class Customer extends Model {
     defaultValue: true,
   })
   isActive: boolean;
+
+  @BelongsTo(() => Category)
+  category: Category;
 }

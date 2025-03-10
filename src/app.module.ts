@@ -10,6 +10,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Dialect } from 'sequelize';
 import { Customer } from './customer/entities/customer.entity';
 import { CategoryModule } from './category/category.module';
+import { Category } from './category/entities/category.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -32,7 +33,7 @@ import { CategoryModule } from './category/category.module';
         min: 0, // จำนวน connection ขั้นต่ำใน pool
         idle: 30000, // ปล่อย connection ถ้าไม่ได้ใช้งานเกิน 30 วินาที
       },
-      models: [Customer],
+      models: [Customer, Category],
     }),
     ProductModule,
     UtilityModule,

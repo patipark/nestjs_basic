@@ -4,6 +4,7 @@ import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Customer } from './entities/customer.entity';
 import { Op } from 'sequelize';
+import { Category } from 'src/category/entities/category.entity';
 
 @Injectable()
 export class CustomerService {
@@ -20,7 +21,9 @@ export class CustomerService {
 
   async findAll() {
     // return `This action returns all customer`;
-    return await this.customerModel.findAll();
+    return await this.customerModel.findAll({
+      include: [Category], 
+    });
   }
 
   async findAll2() {

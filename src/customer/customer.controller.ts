@@ -34,8 +34,8 @@ export class CustomerController {
   }
 
   @Get() //http://localhost:3000/api/v1/customer
-  findAll() {
-    return this.customerService.findAll2();
+  async findAll() {
+    return await this.customerService.findAll();
   }
 
   @Get(':id') //http://localhost:3000/api/v1/customer/1
