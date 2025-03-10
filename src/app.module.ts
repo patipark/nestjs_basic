@@ -12,6 +12,7 @@ import { Customer } from './customer/entities/customer.entity';
 import { CategoryModule } from './category/category.module';
 import { Category } from './category/entities/category.entity';
 import { AuthModule } from './auth/auth.module';
+import { User } from './auth/entities/user.entities';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -34,7 +35,7 @@ import { AuthModule } from './auth/auth.module';
         min: 0, // จำนวน connection ขั้นต่ำใน pool
         idle: 30000, // ปล่อย connection ถ้าไม่ได้ใช้งานเกิน 30 วินาที
       },
-      models: [Customer, Category],
+      models: [Customer, Category , User],
     }),
     ProductModule,
     UtilityModule,
