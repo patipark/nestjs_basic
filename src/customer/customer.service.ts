@@ -3,6 +3,7 @@ import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Customer } from './entities/customer.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class CustomerService {
@@ -20,6 +21,16 @@ export class CustomerService {
   async findAll() {
     // return `This action returns all customer`;
     return await this.customerModel.findAll();
+  }
+
+  async findAll2() {
+    // return `This action returns all customer`;
+    return await this.customerModel.findAll({
+      where: {
+        [Op.and]: [{ categoryId: 2 }, { isActive: false }],
+      },
+    });
+    // SELECT * FROM customers  WHERE (`category_id` = 2 AND `isActive` = false);
   }
 
   async findOne(id: number) {

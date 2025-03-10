@@ -35,7 +35,7 @@ export class CustomerController {
 
   @Get() //http://localhost:3000/api/v1/customer
   findAll() {
-    return this.customerService.findAll();
+    return this.customerService.findAll2();
   }
 
   @Get(':id') //http://localhost:3000/api/v1/customer/1
