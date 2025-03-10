@@ -11,6 +11,7 @@ import { Dialect } from 'sequelize';
 import { Customer } from './customer/entities/customer.entity';
 import { CategoryModule } from './category/category.module';
 import { Category } from './category/entities/category.entity';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -40,6 +41,7 @@ import { Category } from './category/entities/category.entity';
     GlobalHelperModule,
     CustomerModule,
     CategoryModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
