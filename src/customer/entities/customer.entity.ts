@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // import { DataTypes } from 'sequelize';
-import { DataType, Column, Model, Table } from 'sequelize-typescript';
+import { IsEmail, IsNotEmpty } from 'class-validator';
+import { DataType, Column, Model, Table, Is } from 'sequelize-typescript';
 
 @Table({
   tableName: 'customers',
@@ -16,6 +14,7 @@ export class Customer extends Model {
   //   })
   //   id: number;
 
+  @IsNotEmpty()
   @Column({
     type: DataType.STRING(400),
     allowNull: false,
@@ -23,7 +22,13 @@ export class Customer extends Model {
   name: string;
 
   @Column
+  @IsEmail()
   email: string;
+
+  @Column({
+    field: 'category_id',
+  })
+  categoryId: number;
 
   @Column({
     defaultValue: true,
