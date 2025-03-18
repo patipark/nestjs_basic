@@ -67,6 +67,6 @@ export class AuthService {
     //   "iat": 1742309657,
     //   "exp": 1742396057
     // }
-    return { access_token: token, refresh_token: 'refresh_token' };
+    return { access_token: token };
   }
 }
