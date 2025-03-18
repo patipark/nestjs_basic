@@ -27,8 +27,8 @@ export class AuthController {
   async login(@Body() userLoginDto: UserLoginDto) {
     const user = await this.authService.login(userLoginDto);
     return {
-      message: 'ลงทะเบียนสำเร็จ',
-      data: user,
+      message: 'เข้าสู่ระบบสำเร็จ',
+      user: user,
     };
   }
 }

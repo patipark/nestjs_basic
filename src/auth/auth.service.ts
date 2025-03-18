@@ -8,6 +8,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { hash, genSalt, compare, compareSync } from 'bcrypt';
 import { UserLoginDto } from './dto/user-login.dto';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -44,22 +45,15 @@ export class AuthService {
 
     // console.log(typeof user);
     // console.log(user);
-    const userId = user.id;
-    const passwordHash = user.password;
-    const isActive = user.isActive;
+    // const userId = user.id;
+    // const passwordHash = user.password;
+    // const isActive = user.isActive;
     // const isMatch = compareSync(userLoginDto.password, passwordHash);
-    const isMatch = await compare(userLoginDto.password, passwordHash);
+    const isMatch = await compare(userLoginDto.password, user.password);
     if (!isMatch) {
       throw new BadRequestException('Password is incorrect');
     }
 
-    return {
-      userId: userId,
-      password: userLoginDto.password,
-      passwordHash: passwordHash,
-      isActive: isActive,
-      isMatch: isMatch,
-      user: user,
-    };
+    return user;
   }
 }
