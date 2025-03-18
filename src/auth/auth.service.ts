@@ -8,12 +8,14 @@ import { InjectModel } from '@nestjs/sequelize';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { hash, genSalt, compare, compareSync } from 'bcrypt';
 import { UserLoginDto } from './dto/user-login.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(User)
     private readonly userModel: typeof User,
+    private readonly jwtService: JwtService,
   ) {}
 
   async register(userRegisterDto: UserRegisterDto) {
@@ -54,6 +56,17 @@ export class AuthService {
       throw new BadRequestException('Password is incorrect');
     }
 
-    return user;
+    const payload = { user_id: user.id };
+    const token = await this.jwtService.signAsync(payload, {
+      secret: process.env.JWT_SECRET,
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+    // payload when decode token
+    // {
+    //   "user_id": 3,
+    //   "iat": 1742309657,
+    //   "exp": 1742396057
+    // }
+    return { access_token: token, refresh_token: 'refresh_token' };
   }
 }
