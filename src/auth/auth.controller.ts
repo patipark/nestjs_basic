@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { UserLoginDto } from './dto/user-login.dto';
@@ -20,6 +20,7 @@ export class AuthController {
   }
 
   @Post('login') //http://localhost:3000/api/v1/auth/login
+  @HttpCode(HttpStatus.OK) // https://stackoverflow.com/questions/76915921/nestjs-controller-always-return-201-created-when-it-works-with-httpclient
   async login(@Body() userLoginDto: UserLoginDto) {
     const user = await this.authService.login(userLoginDto);
     return {
