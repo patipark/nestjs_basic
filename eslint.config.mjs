@@ -32,15 +32,15 @@ export default tseslint.config(
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
-      "@typescript-eslint/no-unsafe-assignment": "off", 
-      'prettier/prettier': [
-        'error', {
-          endOfLine: 'auto',
-          printWidth: 100,
-          singleQuote: true,
-          trailingComma: 'all',
-        },
-      ],
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      // 'prettier/prettier': [
+      //   'error', {
+      //     endOfLine: 'auto',
+      //     printWidth: 100,
+      //     singleQuote: true,
+      //     trailingComma: 'all',
+      //   },
+      // ],
     },
   },
 );
