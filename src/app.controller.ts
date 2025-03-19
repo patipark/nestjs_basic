@@ -1,15 +1,19 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @Get('/')
   getHome() {
     return {
       message: 'Welcome to my NestJS API',
-      version: process.env.API_VERSION ?? '1.0.0',
+      version: this.configService.get<string>('API_VERSION') ?? '1.0.0',
     };
   }
 

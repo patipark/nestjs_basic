@@ -13,9 +13,13 @@ import { CategoryModule } from './category/category.module';
 import { Category } from './category/entities/category.entity';
 import { AuthModule } from './auth/auth.module';
 import { User } from './auth/entities/user.entities';
+
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true, // Makes the module available throughout the application
+    }),
     SequelizeModule.forRoot({
       dialect: process.env.DB_DIALECT as Dialect,
       host: process.env.DB_HOST,
