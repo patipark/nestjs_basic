@@ -19,9 +19,9 @@ export class AppController {
       type: 'object',
       properties: {
         message: { type: 'string', example: 'Welcome to my NestJS API' },
-        version: { type: 'string', example: '1.0.0' }
-      }
-    }
+        version: { type: 'string', example: '1.0.0' },
+      },
+    },
   })
   @Get('/')
   getHome() {
@@ -32,7 +32,11 @@ export class AppController {
   }
 
   @ApiOperation({ summary: 'Get hello message' })
-  @ApiResponse({ status: 200, description: 'Returns hello message', type: String })
+  @ApiResponse({
+    status: 200,
+    description: 'Returns hello message',
+    type: String,
+  })
   @Get('/hello')
   getHello(): string {
     return this.appService.getHello();

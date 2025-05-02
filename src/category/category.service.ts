@@ -10,7 +10,9 @@ export class CategoryService {
   constructor(@InjectModel(Category) private categoryModel: typeof Category) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    return await this.categoryModel.create(createCategoryDto as Partial<Category>);
+    return await this.categoryModel.create(
+      createCategoryDto as Partial<Category>,
+    );
   }
 
   async findAll() {

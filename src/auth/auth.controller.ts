@@ -1,9 +1,24 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Request, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { UserLoginDto } from './dto/user-login.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 
 @ApiTags('authentication')
 @Controller({
@@ -27,11 +42,11 @@ export class AuthController {
           properties: {
             id: { type: 'number', example: 1 },
             username: { type: 'string', example: 'johndoe' },
-            email: { type: 'string', example: 'john.doe@example.com' }
-          }
-        }
-      }
-    }
+            email: { type: 'string', example: 'john.doe@example.com' },
+          },
+        },
+      },
+    },
   })
   @Post('register') // http://localhost:3000/api/v1/auth/register
   async register(@Body() userRegisterDto: UserRegisterDto) {
@@ -51,17 +66,20 @@ export class AuthController {
       type: 'object',
       properties: {
         message: { type: 'string', example: 'เข้าสู่ระบบสำเร็จ' },
-        access_token: { type: 'string', example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' },
+        access_token: {
+          type: 'string',
+          example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
+        },
         user: {
           type: 'object',
           properties: {
             id: { type: 'number', example: 1 },
             username: { type: 'string', example: 'johndoe' },
-            email: { type: 'string', example: 'john.doe@example.com' }
-          }
-        }
-      }
-    }
+            email: { type: 'string', example: 'john.doe@example.com' },
+          },
+        },
+      },
+    },
   })
   @Post('login') // http://localhost:3000/api/v1/auth/login
   @HttpCode(HttpStatus.OK)
@@ -83,9 +101,9 @@ export class AuthController {
       properties: {
         id: { type: 'number', example: 1 },
         username: { type: 'string', example: 'johndoe' },
-        email: { type: 'string', example: 'john.doe@example.com' }
-      }
-    }
+        email: { type: 'string', example: 'john.doe@example.com' },
+      },
+    },
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @UseGuards(JwtAuthGuard)

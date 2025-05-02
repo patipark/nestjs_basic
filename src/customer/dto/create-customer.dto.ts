@@ -4,14 +4,14 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateCustomerDto {
   @ApiProperty({
     description: 'The name of the customer',
-    example: 'John Doe'
+    example: 'John Doe',
   })
   @IsNotEmpty()
   name: string;
 
   @ApiProperty({
     description: 'The email of the customer',
-    example: 'john.doe@example.com'
+    example: 'john.doe@example.com',
   })
   @IsEmail()
   email: string;
@@ -19,7 +19,7 @@ export class CreateCustomerDto {
   @ApiProperty({
     description: 'Whether the customer is active',
     example: true,
-    default: true
+    default: true,
   })
   isActive: boolean;
 }

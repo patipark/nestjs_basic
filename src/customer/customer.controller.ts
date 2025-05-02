@@ -1,8 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UsePipes, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ValidationPipe,
+  UsePipes,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBody,
+} from '@nestjs/swagger';
 
 @ApiTags('customers')
 @Controller({
@@ -27,11 +45,11 @@ export class CustomerController {
             id: { type: 'number', example: 1 },
             name: { type: 'string', example: 'John Doe' },
             email: { type: 'string', example: 'john.doe@example.com' },
-            isActive: { type: 'boolean', example: true }
-          }
-        }
-      }
-    }
+            isActive: { type: 'boolean', example: true },
+          },
+        },
+      },
+    },
   })
   @ApiResponse({ status: 422, description: 'Validation failed' })
   @Post() //http://localhost:3000/api/v1/customer
@@ -57,10 +75,10 @@ export class CustomerController {
           id: { type: 'number', example: 1 },
           name: { type: 'string', example: 'John Doe' },
           email: { type: 'string', example: 'john.doe@example.com' },
-          isActive: { type: 'boolean', example: true }
-        }
-      }
-    }
+          isActive: { type: 'boolean', example: true },
+        },
+      },
+    },
   })
   @Get() //http://localhost:3000/api/v1/customer
   async findAll() {
@@ -78,9 +96,9 @@ export class CustomerController {
         id: { type: 'number', example: 1 },
         name: { type: 'string', example: 'John Doe' },
         email: { type: 'string', example: 'john.doe@example.com' },
-        isActive: { type: 'boolean', example: true }
-      }
-    }
+        isActive: { type: 'boolean', example: true },
+      },
+    },
   })
   @ApiResponse({ status: 404, description: 'Customer not found' })
   @Get(':id') //http://localhost:3000/api/v1/customer/1
@@ -101,16 +119,22 @@ export class CustomerController {
     schema: {
       type: 'object',
       properties: {
-        message: { type: 'string', example: 'แก้ไขข้อมูลสำเร็จ' }
-      }
-    }
+        message: { type: 'string', example: 'แก้ไขข้อมูลสำเร็จ' },
+      },
+    },
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 422, description: 'Validation failed' })
   @Patch(':id') //http://localhost:3000/api/v1/customer/1
   @UsePipes(new ValidationPipe({ transform: true }))
-  async update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
-    const affectedCount = await this.customerService.update(+id, updateCustomerDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateCustomerDto: UpdateCustomerDto,
+  ) {
+    const affectedCount = await this.customerService.update(
+      +id,
+      updateCustomerDto,
+    );
     if (affectedCount === 0) {
       throw new BadRequestException(`แก้ไขข้อมูลไม่สำเร็จ`); // 400
     }
@@ -125,9 +149,9 @@ export class CustomerController {
     schema: {
       type: 'object',
       properties: {
-        message: { type: 'string', example: 'ลบข้อมูลสำเร็จ' }
-      }
-    }
+        message: { type: 'string', example: 'ลบข้อมูลสำเร็จ' },
+      },
+    },
   })
   @ApiResponse({ status: 404, description: 'Customer not found' })
   @Delete(':id') //http://localhost:3000/api/v1/customer/1

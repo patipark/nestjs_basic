@@ -44,8 +44,14 @@ export class CategoryController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    const effectedCount = await this.categoryService.update(+id, updateCategoryDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateCategoryDto: UpdateCategoryDto,
+  ) {
+    const effectedCount = await this.categoryService.update(
+      +id,
+      updateCategoryDto,
+    );
     if (effectedCount === 0) {
       throw new BadRequestException(`แก้ไขข้อมูลไม่สำเร็จ`); // 400
     }

@@ -16,7 +16,9 @@ export class CustomerService {
 
   async create(createCustomerDto: CreateCustomerDto) {
     // return 'This action adds a new customer';
-    return await this.customerModel.create(createCustomerDto as Partial<Customer>);
+    return await this.customerModel.create(
+      createCustomerDto as Partial<Customer>,
+    );
   }
 
   async findAll() {

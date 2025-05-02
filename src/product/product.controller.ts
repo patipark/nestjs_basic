@@ -26,10 +26,10 @@ export class ProductController {
         properties: {
           id: { type: 'number', example: 1 },
           name: { type: 'string', example: 'Product 1' },
-          price: { type: 'number', example: 100 }
-        }
-      }
-    }
+          price: { type: 'number', example: 100 },
+        },
+      },
+    },
   })
   @Get('/') // http://localhost:3000/api/v1/product
   getProducts(): any[] {
@@ -54,9 +54,9 @@ export class ProductController {
     schema: {
       type: 'object',
       properties: {
-        server_date: { type: 'string', example: '2023-01-01T00:00:00.000Z' }
-      }
-    }
+        server_date: { type: 'string', example: '2023-01-01T00:00:00.000Z' },
+      },
+    },
   })
   @Get('/date') // http://localhost:3000/api/v1/product/date
   getDate(): any {
@@ -77,9 +77,9 @@ export class ProductController {
     schema: {
       type: 'object',
       properties: {
-        server_thai_date: { type: 'string', example: '1 มกราคม 2566' }
-      }
-    }
+        server_thai_date: { type: 'string', example: '1 มกราคม 2566' },
+      },
+    },
   })
   @Version('2') // http://localhost:3000/api/v2/product/thaidate
   @Get('/thaidate')

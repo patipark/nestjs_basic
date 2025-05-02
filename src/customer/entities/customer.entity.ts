@@ -1,6 +1,14 @@
 // import { DataTypes } from 'sequelize';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { DataType, Column, Model, Table, Is, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import {
+  DataType,
+  Column,
+  Model,
+  Table,
+  Is,
+  BelongsTo,
+  ForeignKey,
+} from 'sequelize-typescript';
 import { Category } from 'src/category/entities/category.entity';
 
 @Table({
