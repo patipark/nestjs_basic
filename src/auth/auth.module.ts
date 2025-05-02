@@ -11,10 +11,14 @@ import { ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     PassportModule,
-    JwtModule.register({
-      // signOptions: {
-      //   expiresIn: process.env.JWT_EXPIRES_IN, // error ในการใช้งาน ไม่มีค่า process.env.JWT_EXPIRES_IN ส่งมา
-      // },
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: {
+          expiresIn: configService.get<string>('JWT_EXPIRES_IN', '1d'),
+        },
+      }),
     }),
     SequelizeModule.forFeature([User]),
   ],

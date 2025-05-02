@@ -1,18 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  BadRequestException,
-  Controller,
-  Get,
-  HttpException,
-  HttpStatus,
-  Version,
-} from '@nestjs/common';
+import { Controller, Get, Version } from '@nestjs/common';
 import { UtilityService } from '../shared/utility/utility.service';
 import { GlobalHelperService } from 'src/shared/global-helper/global-helper.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-//การทำ VersioningType แบบ URIโดยการเพิ่ม version ใน path ของ controller
-//http://localhost:3000/api/v1/product/
+// URI versioning example: http://localhost:3000/api/v1/product/
 @ApiTags('products')
 @Controller({
   path: 'product',
@@ -40,7 +31,7 @@ export class ProductController {
       }
     }
   })
-  @Get('/') //http://localhost:3000/api/v1/product
+  @Get('/') // http://localhost:3000/api/v1/product
   getProducts(): any[] {
     return [
       {
@@ -67,10 +58,8 @@ export class ProductController {
       }
     }
   })
-  @Get('/date') //http://localhost:3000/api/v1/product/date
+  @Get('/date') // http://localhost:3000/api/v1/product/date
   getDate(): any {
-    // throw new HttpException('ทดสอบโยน Error', HttpStatus.BAD_REQUEST);
-    // throw new BadRequestException('ทดสอบโยน Error');
     return {
       server_date: this.utilityService.getServerDate(),
     };
@@ -92,7 +81,7 @@ export class ProductController {
       }
     }
   })
-  @Version('2') //http://localhost:3000/api/v2/product/thaidate
+  @Version('2') // http://localhost:3000/api/v2/product/thaidate
   @Get('/thaidate')
   getThaiDate2(): any {
     return {
