@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { HttpStatus, VersioningType } from '@nestjs/common/enums';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -23,6 +24,18 @@ async function bootstrap() {
       errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY, // 422= Unprocessable Entity ,default 400
     }),
   );
+
+  // Setup Swagger
+  const config = new DocumentBuilder()
+    .setTitle('NestJS API')
+    .setDescription('The NestJS API documentation')
+    .setVersion('1.0')
+    .addTag('api')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document);
+
   // listen port
   await app.listen(process.env.PORT ?? 3000);
 }
